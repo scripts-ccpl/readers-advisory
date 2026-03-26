@@ -2,22 +2,58 @@
 <html>
 <head>
     <title>Readers Advisory</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f4f4;
+            text-align: center;
+            padding: 40px;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            margin: 20px auto;
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+        button {
+            padding: 10px;
+            margin: 10px;
+            width: 80%;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
 <h1>Readers Advisory</h1>
 
-<p>If you see this, the page is working.</p>
+<div class="card">
+    <h3>Choose a Genre</h3>
 
-<select>
-    <option>Fantasy</option>
-    <option>Mystery</option>
-    <option>Romance</option>
-</select>
+    <button onclick="recommend('mystery')">Mystery</button>
+    <button onclick="recommend('fantasy')">Fantasy</button>
+    <button onclick="recommend('romance')">Romance</button>
+    <button onclick="recommend('scifi')">Sci-Fi</button>
 
-<br><br>
+    <p id="result"></p>
+</div>
 
-<button onclick="alert('Clicked works!')">Click Me</button>
+<script>
+function recommend(genre) {
+    const result = document.getElementById("result");
+
+    const books = {
+        mystery: "Try 'Gone Girl'",
+        fantasy: "Try 'Harry Potter'",
+        romance: "Try 'Pride and Prejudice'",
+        scifi: "Try 'Dune'"
+    };
+
+    result.innerText = books[genre];
+}
+</script>
 
 </body>
 </html>
