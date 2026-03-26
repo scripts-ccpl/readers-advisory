@@ -25,6 +25,12 @@
         }
     </style>
 </head>
+    <script>
+document.querySelectorAll("button").forEach(btn => {
+    btn.addEventListener("click", function () {
+        alert("Button clicked: " + this.innerText);
+    });
+</script>
 <body>
 
 <h1>Readers Advisory</h1>
