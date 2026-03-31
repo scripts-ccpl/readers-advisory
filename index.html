@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CCPL Readers' Advisory</title>
+
   <style>
     :root{
       --ccpl-blue:#215D70;
@@ -16,6 +17,7 @@
     }
 
     *{box-sizing:border-box}
+
     body{
       margin:0;
       font-family: Arial, Helvetica, sans-serif;
@@ -29,6 +31,7 @@
       padding:24px;
     }
 
+    /* HEADER */
     .hero{
       background:linear-gradient(135deg, var(--ccpl-blue), #215D70);
       color:#fff;
@@ -36,6 +39,7 @@
       padding:28px;
       box-shadow:0 8px 24px rgba(0,0,0,.12);
       margin-bottom:22px;
+      text-align:center;
     }
 
     .hero h1{
@@ -43,14 +47,14 @@
       font-size:2rem;
     }
 
-      .hero p
-  margin:10px auto 0;
-  font-size:1rem;
-  line-height:1.55;
-  max-width:800px;
-  text-align:center;
+    .hero p{
+      margin:10px auto 0;
+      font-size:1rem;
+      line-height:1.55;
+      max-width:800px;
     }
 
+    /* GRID LAYOUT */
     .grid{
       display:grid;
       grid-template-columns:1.1fr .9fr;
@@ -71,6 +75,7 @@
       color:var(--ccpl-blue);
     }
 
+    /* SEARCH BAR */
     .search-row{
       display:flex;
       gap:10px;
@@ -112,6 +117,7 @@
       background:#e3edf6;
     }
 
+    /* CHIPS */
     .chips{
       display:flex;
       flex-wrap:wrap;
@@ -155,6 +161,7 @@
       color:var(--ccpl-blue);
     }
 
+    /* QUICK PICKS */
     .quick-links{
       display:grid;
       grid-template-columns:repeat(2, minmax(0,1fr));
@@ -174,174 +181,167 @@
       line-height:1.45;
     }
 
+    /* MOBILE */
     @media (max-width: 860px){
       .grid{
         grid-template-columns:1fr;
       }
+
       .quick-links{
         grid-template-columns:1fr;
       }
     }
   </style>
 </head>
+
 <body>
-  <div class="wrap">
 
-    <div class="hero">
-      <h1>Cecil County Public Library Readers’ Advisory</h1>
-      <p>
-        Choose a genre, add tags, or type your own keywords to search the CCPL catalog.
-      </p>
-    </div>
+<div class="wrap">
 
-    <div class="grid">
-      <div class="card">
-        <h2>Find Your Next Read</h2>
-
-        <div class="search-row">
-          <input id="keywordInput" type="text" placeholder="Type a title, theme, mood, or keyword..." />
-          <button class="primary" onclick="runSearch()">Search Catalog</button>
-          <button class="ghost" onclick="clearSelections()">Clear</button>
-        </div>
-
-        <div class="section-label">Genres</div>
-        <div class="chips" id="genreChips">
-          <button class="chip" data-type="genre" data-value="mystery">Mystery</button>
-          <button class="chip" data-type="genre" data-value="thriller">Thriller</button>
-          <button class="chip" data-type="genre" data-value="romance">Romance</button>
-          <button class="chip" data-type="genre" data-value="historical fiction">Historical Fiction</button>
-          <button class="chip" data-type="genre" data-value="science fiction">Science Fiction</button>
-          <button class="chip" data-type="genre" data-value="fantasy">Fantasy</button>
-          <button class="chip" data-type="genre" data-value="horror">Horror</button>
-          <button class="chip" data-type="genre" data-value="biography">Biography</button>
-          <button class="chip" data-type="genre" data-value="memoir">Memoir</button>
-          <button class="chip" data-type="genre" data-value="young adult">Young Adult</button>
-          <button class="chip" data-type="genre" data-value="graphic novel">Graphic Novel</button>
-          <button class="chip" data-type="genre" data-value="cookbooks">Cookbooks</button>
-        </div>
-
-        <div class="section-label">Tags</div>
-        <div class="chips" id="tagChips">
-          <button class="chip" data-type="tag" data-value="fast-paced">Fast-Paced</button>
-          <button class="chip" data-type="tag" data-value="cozy">Cozy</button>
-          <button class="chip" data-type="tag" data-value="dark">Dark</button>
-          <button class="chip" data-type="tag" data-value="funny">Funny</button>
-          <button class="chip" data-type="tag" data-value="heartwarming">Heartwarming</button>
-          <button class="chip" data-type="tag" data-value="suspenseful">Suspenseful</button>
-          <button class="chip" data-type="tag" data-value="found family">Found Family</button>
-          <button class="chip" data-type="tag" data-value="strong female lead">Strong Female Lead</button>
-          <button class="chip" data-type="tag" data-value="diverse voices">Diverse Voices</button>
-          <button class="chip" data-type="tag" data-value="book club">Book Club</button>
-          <button class="chip" data-type="tag" data-value="coming of age">Coming of Age</button>
-          <button class="chip" data-type="tag" data-value="historical setting">Historical Setting</button>
-        </div>
-
-        <div class="summary" id="selectionSummary">
-          <strong>Current search:</strong> none selected yet.
-        </div>
-      </div>
-
-      <div class="card">
-        <h2>Quick Picks</h2>
-        <p>Select a ready-made search:</p>
-
-        <div class="quick-links">
-          <button class="ghost" onclick="quickSearch('mystery cozy')">Cozy Mystery</button>
-          <button class="ghost" onclick="quickSearch('romance funny')">Funny Romance</button>
-          <button class="ghost" onclick="quickSearch('historical fiction book club')">Historical Book Club</button>
-          <button class="ghost" onclick="quickSearch('fantasy found family')">Fantasy + Found Family</button>
-          <button class="ghost" onclick="quickSearch('thriller suspenseful')">Suspenseful Thriller</button>
-          <button class="ghost" onclick="quickSearch('young adult coming of age')">YA Coming-of-Age</button>
-          <button class="ghost" onclick="quickSearch('biography inspiring')">Inspiring Biography</button>
-          <button class="ghost" onclick="quickSearch('graphic novel diverse voices')">Diverse Graphic Novels</button>
-        </div>
-
-        <div class="footer-note">
-        </div>
-      </div>
-    </div>
+  <div class="hero">
+    <h1>Cecil County Public Library Readers’ Advisory</h1>
+    <p>
+      Choose a genre, add tags, or type your own keywords to search the CCPL catalog.
+    </p>
   </div>
 
-  <script>
-    const selectedGenres = new Set();
-    const selectedTags = new Set();
+  <div class="grid">
 
-    const catalogBase = "https://ceco.ent.sirsi.net/client/en_US/default/search/results?qu=";
+    <!-- LEFT -->
+    <div class="card">
+      <h2>Find Your Next Read</h2>
 
-    document.querySelectorAll(".chip").forEach(chip => {
-      chip.addEventListener("click", () => {
-        const type = chip.dataset.type;
-        const value = chip.dataset.value;
+      <div class="search-row">
+        <input id="keywordInput" type="text" placeholder="Type a title, theme, mood, or keyword..." />
+        <button class="primary" onclick="runSearch()">Search Catalog</button>
+        <button class="ghost" onclick="clearSelections()">Clear</button>
+      </div>
 
-        chip.classList.toggle("active");
+      <div class="section-label">Genres</div>
+      <div class="chips">
+        <button class="chip" data-type="genre" data-value="mystery">Mystery</button>
+        <button class="chip" data-type="genre" data-value="thriller">Thriller</button>
+        <button class="chip" data-type="genre" data-value="romance">Romance</button>
+        <button class="chip" data-type="genre" data-value="historical fiction">Historical Fiction</button>
+        <button class="chip" data-type="genre" data-value="science fiction">Science Fiction</button>
+        <button class="chip" data-type="genre" data-value="fantasy">Fantasy</button>
+        <button class="chip" data-type="genre" data-value="horror">Horror</button>
+        <button class="chip" data-type="genre" data-value="biography">Biography</button>
+        <button class="chip" data-type="genre" data-value="memoir">Memoir</button>
+        <button class="chip" data-type="genre" data-value="young adult">Young Adult</button>
+        <button class="chip" data-type="genre" data-value="graphic novel">Graphic Novel</button>
+        <button class="chip" data-type="genre" data-value="cookbooks">Cookbooks</button>
+      </div>
 
-        if (type === "genre") {
-          chip.classList.contains("active")
-            ? selectedGenres.add(value)
-            : selectedGenres.delete(value);
-        } else {
-          chip.classList.contains("active")
-            ? selectedTags.add(value)
-            : selectedTags.delete(value);
-        }
+      <div class="section-label">Tags</div>
+      <div class="chips">
+        <button class="chip" data-type="tag" data-value="fast-paced">Fast-Paced</button>
+        <button class="chip" data-type="tag" data-value="cozy">Cozy</button>
+        <button class="chip" data-type="tag" data-value="dark">Dark</button>
+        <button class="chip" data-type="tag" data-value="funny">Funny</button>
+        <button class="chip" data-type="tag" data-value="heartwarming">Heartwarming</button>
+        <button class="chip" data-type="tag" data-value="suspenseful">Suspenseful</button>
+        <button class="chip" data-type="tag" data-value="found family">Found Family</button>
+        <button class="chip" data-type="tag" data-value="strong female lead">Strong Female Lead</button>
+        <button class="chip" data-type="tag" data-value="diverse voices">Diverse Voices</button>
+        <button class="chip" data-type="tag" data-value="book club">Book Club</button>
+        <button class="chip" data-type="tag" data-value="coming of age">Coming of Age</button>
+        <button class="chip" data-type="tag" data-value="historical setting">Historical Setting</button>
+      </div>
 
-        updateSummary();
-      });
-    });
+      <div class="summary" id="selectionSummary">
+        <strong>Current search:</strong> none selected yet.
+      </div>
+    </div>
 
-    function buildQuery() {
-      const typed = document.getElementById("keywordInput").value.trim();
-      const parts = [
-        ...Array.from(selectedGenres),
-        ...Array.from(selectedTags)
-      ];
+    <!-- RIGHT -->
+    <div class="card">
+      <h2>Quick Picks</h2>
+      <p>Select a ready-made search:</p>
 
-      if (typed) parts.unshift(typed);
+      <div class="quick-links">
+        <button class="ghost" onclick="quickSearch('mystery cozy')">Cozy Mystery</button>
+        <button class="ghost" onclick="quickSearch('romance funny')">Funny Romance</button>
+        <button class="ghost" onclick="quickSearch('historical fiction book club')">Historical Book Club</button>
+        <button class="ghost" onclick="quickSearch('fantasy found family')">Fantasy + Found Family</button>
+        <button class="ghost" onclick="quickSearch('thriller suspenseful')">Suspenseful Thriller</button>
+        <button class="ghost" onclick="quickSearch('young adult coming of age')">YA Coming-of-Age</button>
+        <button class="ghost" onclick="quickSearch('biography inspiring')">Inspiring Biography</button>
+        <button class="ghost" onclick="quickSearch('graphic novel diverse voices')">Diverse Graphic Novels</button>
+      </div>
+    </div>
 
-      return parts.join(" ");
+  </div>
+</div>
+
+<script>
+const selectedGenres = new Set();
+const selectedTags = new Set();
+
+const catalogBase = "https://ceco.ent.sirsi.net/client/en_US/default/search/results?qu=";
+
+document.querySelectorAll(".chip").forEach(chip => {
+  chip.addEventListener("click", () => {
+    const type = chip.dataset.type;
+    const value = chip.dataset.value;
+
+    chip.classList.toggle("active");
+
+    if (type === "genre") {
+      chip.classList.contains("active") ? selectedGenres.add(value) : selectedGenres.delete(value);
+    } else {
+      chip.classList.contains("active") ? selectedTags.add(value) : selectedTags.delete(value);
     }
 
-    function runSearch() {
-      const query = buildQuery();
-      if (!query) {
-        alert("Please choose a genre, a tag, or type a keyword first.");
-        return;
-      }
+    updateSummary();
+  });
+});
 
-      const url = catalogBase + encodeURIComponent(query);
-      window.open(url, "_blank");
-    }
+function buildQuery() {
+  const typed = document.getElementById("keywordInput").value.trim();
+  const parts = [...selectedGenres, ...selectedTags];
+  if (typed) parts.unshift(typed);
+  return parts.join(" ");
+}
 
-    function quickSearch(query) {
-      window.open(catalogBase + encodeURIComponent(query), "_blank");
-    }
+function runSearch() {
+  const query = buildQuery();
+  if (!query) {
+    alert("Please choose a genre, a tag, or type a keyword first.");
+    return;
+  }
+  window.open(catalogBase + encodeURIComponent(query), "_blank");
+}
 
-    function clearSelections() {
-      selectedGenres.clear();
-      selectedTags.clear();
-      document.getElementById("keywordInput").value = "";
-      document.querySelectorAll(".chip").forEach(chip => chip.classList.remove("active"));
-      updateSummary();
-    }
+function quickSearch(query) {
+  window.open(catalogBase + encodeURIComponent(query), "_blank");
+}
 
-    function updateSummary() {
-      const typed = document.getElementById("keywordInput").value.trim();
-      const genres = Array.from(selectedGenres);
-      const tags = Array.from(selectedTags);
+function clearSelections() {
+  selectedGenres.clear();
+  selectedTags.clear();
+  document.getElementById("keywordInput").value = "";
+  document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+  updateSummary();
+}
 
-      let text = "";
+function updateSummary() {
+  const typed = document.getElementById("keywordInput").value.trim();
+  const genres = [...selectedGenres];
+  const tags = [...selectedTags];
 
-      if (typed) text += `Keyword: "${typed}"`;
-      if (genres.length) text += `${text ? " | " : ""}Genres: ${genres.join(", ")}`;
-      if (tags.length) text += `${text ? " | " : ""}Tags: ${tags.join(", ")}`;
+  let text = "";
+  if (typed) text += `Keyword: "${typed}"`;
+  if (genres.length) text += `${text ? " | " : ""}Genres: ${genres.join(", ")}`;
+  if (tags.length) text += `${text ? " | " : ""}Tags: ${tags.join(", ")}`;
+  if (!text) text = "none selected yet.";
 
-      if (!text) text = "none selected yet.";
+  document.getElementById("selectionSummary").innerHTML =
+    `<strong>Current search:</strong> ${text}`;
+}
 
-      document.getElementById("selectionSummary").innerHTML =
-        `<strong>Current search:</strong> ${text}`;
-    }
+document.getElementById("keywordInput").addEventListener("input", updateSummary);
+</script>
 
-    document.getElementById("keywordInput").addEventListener("input", updateSummary);
-  </script>
 </body>
 </html>
